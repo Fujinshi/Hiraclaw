@@ -1,0 +1,179 @@
+{
+  "name": "hiraclaw-vscode",
+  "displayName": "Hiraclaw",
+  "description": "Practical VS Code companion for Hiraclaw with project-aware launch behavior and a real Control Center.",
+  "version": "0.2.0",
+  "publisher": "devnull-bootloader",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:hiraclaw.start",
+    "onCommand:hiraclaw.startInWorkspaceRoot",
+    "onCommand:hiraclaw.openDocs",
+    "onCommand:hiraclaw.openSetupDocs",
+    "onCommand:hiraclaw.openWorkspaceProfile",
+    "onCommand:hiraclaw.openControlCenter",
+    "onCommand:hiraclaw.newChat",
+    "onCommand:hiraclaw.openChat",
+    "onCommand:hiraclaw.resumeSession",
+    "onCommand:hiraclaw.abortChat",
+    "onView:hiraclaw.controlCenter",
+    "onView:hiraclaw.chat"
+  ],
+  "main": "./src/extension.js",
+  "files": [
+    "README.md",
+    "media/**",
+    "src/extension.js",
+    "src/presentation.js",
+    "src/state.js",
+    "src/chat/**",
+    "themes/**"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "hiraclaw.start",
+        "title": "Hiraclaw: Launch in Terminal",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.startInWorkspaceRoot",
+        "title": "Hiraclaw: Launch in Workspace Root",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.openDocs",
+        "title": "Hiraclaw: Open Repository",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.openSetupDocs",
+        "title": "Hiraclaw: Open Setup Guide",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.openWorkspaceProfile",
+        "title": "Hiraclaw: Open Workspace Profile",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.openControlCenter",
+        "title": "Hiraclaw: Open Control Center",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.newChat",
+        "title": "Hiraclaw: New Chat",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.openChat",
+        "title": "Hiraclaw: Open Chat Panel",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.resumeSession",
+        "title": "Hiraclaw: Resume Session",
+        "category": "Hiraclaw"
+      },
+      {
+        "command": "hiraclaw.abortChat",
+        "title": "Hiraclaw: Abort Generation",
+        "category": "Hiraclaw"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "hiraclaw",
+          "title": "Hiraclaw",
+          "icon": "media/hiraclaw.svg"
+        }
+      ]
+    },
+    "views": {
+      "hiraclaw": [
+        {
+          "id": "hiraclaw.chat",
+          "name": "Chat",
+          "type": "webview"
+        },
+        {
+          "id": "hiraclaw.controlCenter",
+          "name": "Control Center",
+          "type": "webview"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "hiraclaw.openChat",
+        "key": "ctrl+shift+l",
+        "mac": "cmd+shift+l"
+      }
+    ],
+    "configuration": {
+      "title": "Hiraclaw",
+      "properties": {
+        "hiraclaw.launchCommand": {
+          "type": "string",
+          "default": "hiraclaw",
+          "description": "Command run in the integrated terminal when launching Hiraclaw."
+        },
+        "hiraclaw.terminalName": {
+          "type": "string",
+          "default": "Hiraclaw",
+          "description": "Integrated terminal tab name for Hiraclaw sessions."
+        },
+        "hiraclaw.useOpenAIShim": {
+          "type": "boolean",
+          "default": false,
+          "description": "Optionally set CLAUDE_CODE_USE_OPENAI=1 in launched Hiraclaw terminals."
+        },
+        "hiraclaw.permissionMode": {
+          "type": "string",
+          "default": "acceptEdits",
+          "enum": ["default", "acceptEdits", "bypassPermissions", "plan"],
+          "enumDescriptions": [
+            "Prompt for permission on each tool use (requires manual approval)",
+            "Auto-approve file edits, prompt for other operations (recommended)",
+            "Auto-approve all operations without prompting",
+            "Read-only mode — no file modifications allowed"
+          ],
+          "description": "Permission mode for chat sessions. Controls which tool operations are auto-approved."
+        }
+      }
+    },
+    "themes": [
+      {
+        "label": "Hiraclaw Terminal Black",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Hiraclaw-Terminal-Black.json"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "node --test ./src/*.test.js",
+    "lint": "node scripts/lint.js",
+    "package": "npx @vscode/vsce package --no-dependencies"
+  },
+  "keywords": [
+    "hiraclaw",
+    "terminal",
+    "theme",
+    "cli",
+    "llm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gitlawb/hiraclaw"
+  },
+  "license": "MIT"
+}
