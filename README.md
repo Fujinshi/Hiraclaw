@@ -96,7 +96,7 @@ hiraclaw
 Gemini Multi-Key Auto-Rotation
 
 ```bash
-export GEMINI_API_KEYS="AIzaSyA...key1,AIzaSyB...key2,AIzaSyC...key3"
+export GEMINI_API_KEYS="AIzaSyA..."
 export CLAUDE_CODE_USE_GEMINI=1
 export HIRACLAW_ETHICAL_MODE=true
 
